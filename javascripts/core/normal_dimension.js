@@ -28,10 +28,12 @@ function getDimensionPreDilationMultiplier(tier) {
       if (player.achievements.includes("r71")) multiplier = multiplier.times(909);
       if (player.achievements.includes("r68")) multiplier = multiplier.times(1.5);
   }
+  
 
   multiplier = multiplier.times(timeMult());
+  if (player.achievements.includes("r31")) multiplier = multiplier.times(Math.log10(productAllTotalBought()))
   if (tier == 8 && player.achievements.includes("r23")) multiplier = multiplier.times(1.1);
-  else if (player.achievements.includes("r34")) multiplier = multiplier.times(1.02);
+  else if (player.achievements.includes("r34")) multiplier = multiplier.times(2);
   if (tier <= 4 && player.achievements.includes("r43")) multiplier = multiplier.times(1.25);
   if (player.achievements.includes("r48")) multiplier = multiplier.times(1.1);
   if (player.achievements.includes("r72")) multiplier = multiplier.times(1.1); // tbd
