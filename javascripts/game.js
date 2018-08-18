@@ -2136,6 +2136,8 @@ function gainedInfinityPoints() {
     if (player.timestudy.studies.includes(51)) ret = ret.times(1e15)
     if (player.timestudy.studies.includes(141)) ret = ret.times(new Decimal(1e45).dividedBy(Decimal.pow(15, Math.log(player.thisInfinityTime+1)*Math.pow(player.thisInfinityTime+1, 0.125))).max(1))
     if (player.timestudy.studies.includes(142)) ret = ret.times(1e25)
+    if (player.achievements.includes("r43")) ret = ret.times(1.25)
+    if (player.achievements.includes("r55")) ret = ret.times(Math.pow(Math.log10(6000/player.bestInfinityTime),0.1).min(1))
     if (player.timestudy.studies.includes(143)) ret = ret.times(Decimal.pow(15, Math.log(player.thisInfinityTime+1)*Math.pow(player.thisInfinityTime+1, 0.125)))
     if (player.achievements.includes("r116")) ret = ret.times(Decimal.pow(2, Math.log10(getInfinitied()+1)))
     if (player.achievements.includes("r125")) ret = ret.times(Decimal.pow(2, Math.log(player.thisInfinityTime+1)*Math.pow(player.thisInfinityTime+1, 0.11)))
