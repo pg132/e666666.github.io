@@ -3362,6 +3362,12 @@ function ghostifyReset(implode, gain, amount, force) {
 				4: 0,
 			}
 		},
+		exdilation: player.exdilation,
+            	blackhole: player.blackhole,
+            	blackholeDimension1: player.blackholeDimension1,
+            	blackholeDimension2: player.blackholeDimension2,
+            	blackholeDimension3: player.blackholeDimension3,
+            	blackholeDimension4: player.blackholeDimension4,
 		why: player.why,
 		options: player.options,
 		meta: {
