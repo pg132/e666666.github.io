@@ -1047,6 +1047,12 @@ function quantumReset(force, auto, challid, bigRip, implode=false) {
 				4: 0,
 			}
 		},
+		exdilation: player.exdilation, // why not, thought NGUD' shouldnt have this
+            	blackhole: player.blackhole,
+            	blackholeDimension1: player.blackholeDimension1,
+            	blackholeDimension2: player.blackholeDimension2,
+            	blackholeDimension3: player.blackholeDimension3,
+            	blackholeDimension4: player.blackholeDimension4,
 		why: player.why,
 		shameLevel: player.shameLevel,
 		options: player.options,
