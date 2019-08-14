@@ -1048,11 +1048,40 @@ function quantumReset(force, auto, challid, bigRip, implode=false) {
 			}
 		},
 		exdilation: player.exdilation, // why not, thought NGUD' shouldnt have this
-            	blackhole: player.blackhole,
-            	blackholeDimension1: player.blackholeDimension1,
-            	blackholeDimension2: player.blackholeDimension2,
-            	blackholeDimension3: player.blackholeDimension3,
-            	blackholeDimension4: player.blackholeDimension4,
+	blackhole: speedrunMilestonesReached == 0 ? {
+            unl: false,
+            power: new Decimal(0),
+            upgrades: {
+                bankedInfinities : 0,
+                dilatedTime : 0,
+                replicanti : 0,
+                total : 0
+            }
+        }: player.blackhole,
+        blackholeDimension1: speedrunMilestonesReached == 0 ? {
+            amount: new Decimal(0),
+            bought: 0,
+            cost: Decimal.pow(10,4000),
+            power: new Decimal(1)
+        }: player.blackholeDimension1,
+        blackholeDimension2: speedrunMilestonesReached == 0 ? {
+            amount: new Decimal(0),
+            bought: 0,
+            cost: Decimal.pow(10,8000),
+            power: new Decimal(1)
+        }: player.blackholeDimension2,
+        blackholeDimension3: speedrunMilestonesReached == 0 ? {
+            amount: new Decimal(0),
+            bought: 0,
+            cost: Decimal.pow(10,12000),
+            power: new Decimal(1)
+        }: player.blackholeDimension3,
+        blackholeDimension4: speedrunMilestonesReached == 0 ? {
+            amount: new Decimal(0),
+            bought: 0,
+            cost: Decimal.pow(10,20000),
+            power: new Decimal(1)
+        }: player.blackholeDimension4,
 		why: player.why,
 		shameLevel: player.shameLevel,
 		options: player.options,
