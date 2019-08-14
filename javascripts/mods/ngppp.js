@@ -3363,11 +3363,40 @@ function ghostifyReset(implode, gain, amount, force) {
 			}
 		},
 		exdilation: player.exdilation,
-            	blackhole: player.blackhole,
-            	blackholeDimension1: player.blackholeDimension1,
-            	blackholeDimension2: player.blackholeDimension2,
-            	blackholeDimension3: player.blackholeDimension3,
-            	blackholeDimension4: player.blackholeDimension4,
+            	blackhole: player.ghostify.milestones == 0 ? {
+			unl: false,
+			power: new Decimal(0),
+			upgrades: {
+				bankedInfinities : 0,
+				dilatedTime : 0,
+				replicanti : 0,
+				total : 0
+			}
+		}: player.blackhole,
+            	blackholeDimension1: player.ghostify.milestones == 0 ? {
+			amount: new Decimal(0),
+			bought: 0,
+			cost: Decimal.pow(10,4000),
+			power: new Decimal(1)
+		}: player.blackholeDimension1,
+            	blackholeDimension2: player.ghostify.milestones == 0 ? {
+			amount: new Decimal(0),
+			bought: 0,
+			cost: Decimal.pow(10,8000),
+			power: new Decimal(1)
+		}: player.blackholeDimension2,
+            	blackholeDimension3: player.ghostify.milestones == 0 ? {
+			amount: new Decimal(0),
+			bought: 0,
+			cost: Decimal.pow(10,12000),
+			power: new Decimal(1)
+		}: player.blackholeDimension3,
+            	blackholeDimension4: player.ghostify.milestones == 0 ? {
+			amount: new Decimal(0),
+			bought: 0,
+			cost: Decimal.pow(10,20000),
+			power: new Decimal(1)
+		}: player.blackholeDimension4,
 		why: player.why,
 		options: player.options,
 		meta: {
