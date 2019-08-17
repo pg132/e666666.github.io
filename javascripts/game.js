@@ -6576,7 +6576,7 @@ function buyDilationUpgrade(id, max) {
 
 function getPassiveTTGen() {
 	var log=player.dilation.tachyonParticles.max(1).log10()
-	var scs=player.aarexModifications.ngudpV?72:80
+	var scs=player.aarexModifications.ngudpV?77:80
 	if (log>scs) log=scs+Math.sqrt(log*5-375)-5
 	let normal=Math.pow(10,log)/(ghostified?200:2e4)
 	if (!player.achievements.includes("ng3p18")) return normal
@@ -6660,7 +6660,9 @@ function gainDilationGalaxies() {
 
 function getFreeGalaxyGainMult() {
 	let galaxyMult = player.dilation.upgrades.includes(4) ? 2 : 1
-	if (player.aarexModifications.ngudpV) galaxyMult /= 2
+	//if (player.aarexModifications.ngudpV) galaxyMult /= 2 
+	//not by that much
+	if (player.aarexModifications.ngudpV) galaxyMult /= 1.5 // 2/3 of them should be good
 	galaxyMult *= getQCReward(2)
 	if (tmp.ngp3) if (player.masterystudies.includes("d12")) galaxyMult *= getNanofieldRewardEffect(3)
 	return galaxyMult
