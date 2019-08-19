@@ -1315,10 +1315,19 @@ function getDilGain() {
     return Decimal.pow(Decimal.log10(player.money) / 400, getDilExp()).times(getDilPower());
 }
 
+function dilationSoftcapNGUDP(x) { //x is TP
+	if (!player.aarexModifications.ngudpV) return x // dont do anything unless in NGUD'
+	if (x.log10() < 250) return x // before the softcap starts
+	var base = 4*x.log10()
+	var exponent = 247/3+Math.log10(x.log10()-240)
+	return Decimal.pow(base,exponent)
+} 
+
 function getDilTimeGainPerSecond() {
 	let exp=GUBought("br3")?1.1:1
 	if (ghostified&&player.ghostify.ghostlyPhotons.unl) exp*=tmp.le[0]
-	let gain = player.dilation.tachyonParticles.pow(exp).times(Decimal.pow(2, player.dilation.rebuyables[1] * exDilationUpgradeStrength(1)))
+	let TPbase = dilationSoftcapNGUDP(player.dilation.tachyonParticles) // the TP (possibly) after a softcap in NGUD'
+	let gain = TPbase.pow(exp).times(Decimal.pow(2, player.dilation.rebuyables[1] * exDilationUpgradeStrength(1)))
 	if (player.exdilation != undefined) {
 		gain = gain.times(getBlackholePowerEffect())
 		if (player.eternityUpgrades.includes(7)) gain = gain.times(1 + Math.log10(Math.max(1, player.money.log(10))) / 40)
@@ -7427,9 +7436,16 @@ function gameLoop(diff) {
         var colorShorthands=["r","g","b"]
         if (player.ghostify.milestones>1) for (var c=0;c<3;c++) tmp.qu.colorPowers[colorShorthands[c]]=tmp.qu.colorPowers[colorShorthands[c]].add(tmp.qu.usedQuarks[colorShorthands[c]].times(diff/10))
         else tmp.qu.colorPowers[colorCharge.color]=tmp.qu.colorPowers[colorCharge.color].add(colorCharge.charge.times(diff/10))
-        colorBoosts.r=Math.pow(tmp.qu.colorPowers.r.add(1).log10(),player.dilation.active?2/3:0.5)/10+1
-        colorBoosts.g=Math.sqrt(tmp.qu.colorPowers.g.add(1).log10()*2+1)
-        colorBoosts.b=Decimal.pow(10,Math.sqrt(tmp.qu.colorPowers.b.add(1).log10()))
+	if (player.aarexModifications.ngudpV) { 
+		if (tmp.qu.colorPowers.r.add(1).log10() >= 1024) colorBoosts.r=Math.pow(2*Math.pow(tmp.qu.colorPowers.r.add(1).log10(),.9),player.dilation.active?2/3:0.5)/10+1)//2*Math.pow(tmp.qu.colorPowers.r.add(1).log10(),.9) is the log10 of the softcap
+		if (tmp.qu.colorPowers.g.add(1).log10() >= 1024) colorBoosts.g=Math.sqrt((2*Math.pow(tmp.qu.colorPowers.g.add(1).log10(),.9))*2+1) // i know the *2's can be combined
+		if (tmp.qu.colorPowers.b.add(1).log10() >= 1024) colorBoosts.b=Decimal.pow(10,Math.sqrt(2*Math.pow(tmp.qu.colorPowers.r.add(1).log10(),.9)))
+	}
+	else {
+        	colorBoosts.r=Math.pow(tmp.qu.colorPowers.r.add(1).log10(),player.dilation.active?2/3:0.5)/10+1
+        	colorBoosts.g=Math.sqrt(tmp.qu.colorPowers.g.add(1).log10()*2+1)
+        	colorBoosts.b=Decimal.pow(10,Math.sqrt(tmp.qu.colorPowers.b.add(1).log10()))
+	}
         if (colorBoosts.r>1.3) colorBoosts.r=Math.sqrt(colorBoosts.r*1.3)
         if (colorBoosts.r>2.3&&(!player.dilation.active||getTreeUpgradeLevel(2)>7||ghostified)) colorBoosts.r=Math.pow(colorBoosts.r/2.3,0.5*(ghostified&&player.ghostify.neutrinos.boosts>4?1+tmp.nb[4]:1))*2.3
         if (colorBoosts.g>4.5) colorBoosts.g=Math.sqrt(colorBoosts.g*4.5)
