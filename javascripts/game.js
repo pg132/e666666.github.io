@@ -1078,7 +1078,7 @@ function updateTemp() {
 	if (tmp.be) {
 		if (x>100) x=Math.pow(x*100,0.5)
 	} else {
-		if (x>12e8) x=Math.pow(x*144e10,1/3)
+		if (x>12e8) x=Math.pow(x*144e16,1/3)
 		else if (x>12e4) x=Math.pow(x*12e4,0.5)
 	}
 	tmp.it=Decimal.pow(10,x)
@@ -2654,6 +2654,8 @@ function updateExtraReplGalaxies() {
 	}
 	extraReplGalaxies = ts225Eff + ts226Eff
 	if (extraReplGalaxies > 325) extraReplGalaxies = (Math.sqrt(0.9216+0.16*(extraReplGalaxies-324))-0.96)/0.08+324
+	gatheredQuarksBoost = Math.pow(tmp.qu.replicants.quarks.add(1).log10(),player.masterystudies.includes("t362")?0.35:0.25)*0.67*(player.masterystudies.includes("t412")?1.25:1)*(player.ghostify.ghostlyPhotons.unl?tmp.le[3]:1)
+	//above line is just the only other instance of this variable, and it seems to be about correct... so 
 	extraReplGalaxies = Math.floor(extraReplGalaxies * (colorBoosts.g + gatheredQuarksBoost))
 }
 
