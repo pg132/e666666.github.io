@@ -6669,8 +6669,9 @@ function startDilatedEternity(auto, shortcut) {
 
 function dilates(x, m) {
 	let y = 0
+	let z = 0
 	if (player.dilation.active && m!=2 && (m!="meta" || !player.achievements.includes("ng3p63") || !inQC(0))) y++
-	if (player.galacticSacrifice !== undefined && m!=1) y++
+	if (player.galacticSacrifice !== undefined && m!=1) z++
 	if (y) {
 		if (m!="tick") x = x.max(1)
 		else if (player.galacticSacrifice==undefined) x = x.times(1e3)
@@ -6678,6 +6679,7 @@ function dilates(x, m) {
 		if (m=="tick"&&player.galacticSacrifice==undefined) x = x.div(1e3)
 		if (m=="tick"&&x.lt(1)) x = Decimal.div(1,x)
 	}
+	if (z > 0 && x.gte(1)) x = Decimal.pow(10,Math.pow(x.log10(),.75))
 	return x.max(0)
 }
 
