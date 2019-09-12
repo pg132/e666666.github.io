@@ -520,7 +520,11 @@ let quarkGain = function () {
 		var log = (ma.max(1).log10() - 379.4) / (player.achievements.includes("ng3p63") ? 279.8 : 280)
 		if (log > 1.2) log = log*log/1.2
 		if (log > 738 && !hasNU(8)) log = Math.sqrt(log * 738)
-		if (log > 1e4 && player.aarexModifications.nguepV) log = Math.sqrt(1e4 * log)
+		if (player.aarexModifications.nguepV) {
+			for (var i=4; i <= 7; i++){
+				if (log >= Math.pow(10,i)) log = Math.sqrt(Math.pow(10,i)*log)
+			}
+		}
 		return Decimal.pow(10, log).times(Decimal.pow(2, tmp.qu.multPower.total)).floor()
 	}
 	return Decimal.pow(10, ma.max(1).log(10) / Math.log10(Number.MAX_VALUE) - 1).times(quarkMult()).floor();
