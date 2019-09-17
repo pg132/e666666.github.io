@@ -2856,7 +2856,7 @@ function getSpaceShardsGain() {
 	var start = 5
 	if (player.aarexModifications.nguepV) start += 1
 	for (var i = start; i <= 10; i++){
-		if (lret > Math.pow(4,i)) = Math.sqrt(lret*Math.pow(4,i))
+		if (lret > Math.pow(4,i)) lret = Math.sqrt(lret*Math.pow(4,i))
 	}
 	if (lret > Math.pow(2,20)) lret = Math.pow(Math.log2(lret) + 12,4)
 	return Decimal.pow(10,lret)
