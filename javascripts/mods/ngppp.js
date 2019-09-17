@@ -3067,9 +3067,13 @@ function getGHPGain() {
 	if (player.masterystudies == undefined) return new Decimal(0)
 	if (!tmp.qu.bigRip.active) return new Decimal(0)
 	let log=(tmp.qu.bigRip.bestThisRun.log10()/getQCGoal()-1)*2
-	if (player.aarexModifications.nguepV) {
+	if (player.aarexModifications.ngudpV){
 		if (log>1e4) log=Math.sqrt(1e4*log)
+	}
+	if (player.aarexModifications.nguepV) {
 		if (log>2e4) log=Math.pow(4e8*log,1/3)
+		//59049 = 9^5
+		if (log>59049) log = Math.pow(Math.log10(log)/Math.log10(9)+4,5)
 	}
 	return Decimal.pow(10, log).times(Decimal.pow(2,player.ghostify.multPower-1)).floor()
 }
