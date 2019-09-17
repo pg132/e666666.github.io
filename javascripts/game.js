@@ -1067,7 +1067,7 @@ function updateTemp() {
 			if (player.ghostify.neutrinos.boosts>1) {
 				var nb1=Math.pow(Math.pow(nt[0].add(1).log10(),2)+Math.pow(nt[1].add(1).log10(),2)+Math.pow(nt[2].add(1).log10(),2),0.25)*1.5
 				if (nb1 > 100) nb1 = Math.pow(Math.log10(nb1)+8,2)
-				tmp.nb[0] = nb1
+				tmp.nb[1] = nb1
 			}
 			if (player.ghostify.neutrinos.boosts>2) tmp.nb[2]=Math.pow(Math.pow(Math.log10(Math.max(nt[0].max(1).log10()-5,1))/Math.log10(5),2)+Math.pow(Math.log10(Math.max(nt[1].max(1).log10()-5,1))/Math.log10(5),2)+Math.pow(Math.log10(Math.max(nt[2].max(1).log10()-5,1))/Math.log10(5),2),0.25)/Math.pow(3,0.25)+3
 			if (player.ghostify.neutrinos.boosts>3) {
