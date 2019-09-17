@@ -2851,7 +2851,15 @@ function getSpaceShardsGain() {
 	if (hasNU(9)) ret = ret.times(Decimal.max(getEternitied(), 1).pow(0.1))
 	ret = ret.floor()
 	if (isNaN(ret.e)) return new Decimal(0)
-	return ret
+	if (player.aarexModifications.ngudpV == undefined) return ret
+	let lret = Decimal.log10(ret)
+	var start = 5
+	if (player.aarexModifications.nguepV) start += 1
+	for (var i = start; i <= 10; i++){
+		if (lret > Math.pow(4,i)) = Math.sqrt(lret*Math.pow(4,i))
+	}
+	if (lret > Math.pow(2,20)) lret = Math.pow(Math.log2(lret) + 12,4)
+	return Decimal.pow(10,lret)
 }
 
 let bigRipUpgCosts = [0, 2, 3, 5, 20, 30, 45, 60, 150, 300, 2000, 3e9, 3e14, 1e17, 3e18, 3e20, 5e22, 1e33, 1e145, 1e150, 1e160]
