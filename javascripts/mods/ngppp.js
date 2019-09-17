@@ -552,6 +552,7 @@ function getMTSMult(id, modifier) {
 	if (id==351) {
 		let log = Decimal.log10(player.timeShards.max(1).pow(14e-7))
 		if (log > 1e4) log = Math.pow(log*Math.pow(10,36),.1)
+		return Decimal.pow(10,log)
 	}
 	if (id==361) return player.dilation.tachyonParticles.max(1).pow(0.01824033924212366)
 	if (id==371) return Math.pow(extraReplGalaxies+1,0.3)
