@@ -1111,7 +1111,16 @@ function updateTemp() {
 	x=player.galaxies
 	if (tmp.ngp3&&!tmp.qu.bigRip.active&&player.ghostify.ghostlyPhotons.enpowerments>2) x*=tmp.le[9]
 	if (tmp.be&&player.dilation.active&&tmp.qu.breakEternity.upgrades.includes(10)) x*=getBreakUpgMult(10)
-	tmp.ig=Decimal.pow(10,Math.pow(x,Math.min(Math.sqrt(Math.log10(Math.max(x,1)))*2,2.5)))
+	var iglog = Math.pow(x,Math.min(Math.sqrt(Math.log10(Math.max(x,1)))*2,2.5))
+	if (player.aarexModifications.ngudpV){
+		if (iglog > Math.pow(10,15)) { // e1Qt
+			iglog = Math.pow(10+6*Math.log10(iglog),7.5)
+		}
+		if (iglog > Math.pow(10,16)) { //e10Qt
+			iglog = Math.pow(84+Math.log10(iglog),8)
+		}
+	}
+	tmp.ig = Decimal.pow(10,iglog)
 
 	tmp.rm=getReplMult()
 	updateExtraReplGalaxies()
