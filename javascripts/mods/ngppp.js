@@ -542,11 +542,17 @@ function getMTSMult(id, modifier) {
 	if (id==322) {
 		let log = Math.sqrt(3-player.tickspeed.log10())/2e4
 		if (log>110) log = Math.sqrt(log * 27.5) + 55
+		if (log>1000 && player.aarexModifications.ngudpV){
+			log = Math.pow(7+Math.log10(log),3)	
+		}
 		return Decimal.pow(10, log)
 	}
 	if (id==341) return Decimal.pow(2,Math.sqrt(tmp.qu.replicants.quarks.add(1).log10()))
 	if (id==344) return Math.pow(tmp.qu.replicants.quarks.div(1e7).add(1).log10(),0.25)*0.17+1
-	if (id==351) return player.timeShards.max(1).pow(14e-7)
+	if (id==351) {
+		let log = Decimal.log10(player.timeShards.max(1).pow(14e-7))
+		if (log > 1e4) log = Math.pow(log*Math.pow(10,36),.1)
+	}
 	if (id==361) return player.dilation.tachyonParticles.max(1).pow(0.01824033924212366)
 	if (id==371) return Math.pow(extraReplGalaxies+1,0.3)
 	if (id==372) return Math.sqrt(player.timeShards.add(1).log10())/20+1
