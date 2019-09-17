@@ -2970,6 +2970,12 @@ function breakEternity() {
 function getEMGain() {
 	let log=player.timeShards.div(1e9).log10()*0.25
 	if (log>15) log=Math.sqrt(log*15)
+	if (!player.aarexModifications.ngudpV) return Decimal.pow(10,log).floor()
+	start = 9
+	if (player.aarexModifications.nguepV) start = 12
+	for (var i = 9; i <= 20; i++){
+		if (log>Math.pow(2,i)) log = Math.sqrt(Math.pow(2,i)*log)
+	}
 	return Decimal.pow(10,log).floor()
 }
 
