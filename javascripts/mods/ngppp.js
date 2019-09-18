@@ -3043,10 +3043,19 @@ function getBreakUpgMult(id) {
 		return Decimal.pow(10, Math.pow(log1, 1/3) / 1.7 + Math.pow(log2, 1/3) * 2)
 	}
 	if (id == 7) return Decimal.pow(1e9, tmp.qu.breakEternity.epMultPower)
-	if (id == 8) return Math.log10(player.dilation.tachyonParticles.div(1e200).add(1).log10()/100+1)*3+1
+	if (id == 8) {
+		var effect = Math.log10(player.dilation.tachyonParticles.div(1e200).add(1).log10()/100+1)*3+1
+		var times = 2
+		if (player.aarexModifications.nguepV) times = 1
+		for (var i = 1; i <= times; i++){
+			if (effect > 2.2) effect = 1.2+Math.log10(effect+7.8)
+		}
+		return effect
+	}
 	if (id == 9) {
-		var effect = tmp.qu.breakEternity.eternalMatter.div("1e335").add(1).pow(0.05*Math.log10(4)).toNumber()
+		var effect = tmp.qu.breakEternity.eternalMatter.div("1e335").add(1).pow(0.05*Math.log10(4))
 		if (player.aarexModifications.ngudpV && effect.gte(Decimal.pow(10,100))) effect = Decimal.pow(Decimal.log10(effect),50)
+		return effect.toNumber()
 	}
 	if (id == 10) return Math.max(Math.log10(player.eternityPoints.add(1).log10()+1)-1,1)
 }
