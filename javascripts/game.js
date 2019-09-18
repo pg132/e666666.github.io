@@ -1122,6 +1122,11 @@ function updateTemp() {
 		if (x>12e8) x=Math.pow(x*144e10,1/3)
 		else if (x>12e4) x=Math.pow(x*12e4,0.5)
 	}
+	if (player.aarexModifications.ngudpV) {
+		if (x>1e8) x = Math.pow(1e8*x,.5)
+		if (x>1e9) x = Math.pow(1+Math.log10(x),9)
+		if (tmp.be&&x>1e7) x = Math.pow(93+Math.log10(x),3.5)
+	}
 	tmp.it=Decimal.pow(10,x)
 
 	x=player.galaxies
