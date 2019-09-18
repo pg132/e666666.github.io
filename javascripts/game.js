@@ -1126,6 +1126,7 @@ function updateTemp() {
 		if (x>1e8) x = Math.pow(1e8*x,.5)
 		if (x>1e9) x = Math.pow(1+Math.log10(x),9)
 		if (tmp.be&&x>1e7) x = Math.pow(93+Math.log10(x),3.5)
+		if (player.dilation.active && x>1e5) x = Math.pow(1e20*x,.2)
 	}
 	tmp.it=Decimal.pow(10,x)
 
