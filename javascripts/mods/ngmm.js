@@ -553,7 +553,10 @@ function getGSoffset(offset=0) {
 
 function getG11Infinities(){
 	let x = getInfinitied()
-	if (x>1e6 && getEternitied() == 0) x = 1e6
+	if (getEternitied() == 0) {
+		x = Math.pow(x*1e12,1/3)
+		if (x>1e7) x = 1e7 //this should raise the pre eternity cap from e270 to e959 which would be reached at 1 billion infinities
+	}
 	if (tmp.cp>0&&getEternitied()>0&&getInfinitied() < 1e8) x+=2e6
 	if (player.infinityUpgrades.includes("postinfi61")) x += 1e7
 	if (player.infinityUpgrades.includes("postinfi61") && player.galacticSacrifice.upgrades.length>9) x+=player.galacticSacrifice.upgrades.length*1e7
@@ -566,7 +569,11 @@ function getG11Divider(){
 	let z = 10
 	if (tmp.cp>0&&player.challenges.includes("postcngmm_1")) z-=(tmp.cp+6)/4
 	if (tmp.cp>6) z+=0.085*tmp.cp-0.31
-	if (player.infinityUpgrades.includes("postinfi61")) z -= .1
+	if (player.infinityUpgrades.includes("postinfi61")) z -= .1 
+	//might want to boost preeternity a bit more, such as
+	// if IP>2**1024, but no eternities then also z -= .1 
+	// ill put it in the next line, commented out
+	// if (getEternitied() == 0 && player.infinityPoints.gt(Decimal.pow(2,1024))) z -= .1
 	z-=Math.pow(tmp.ec,0.3)/10
 	if (getEternitied()>0) z-=0.5
 	if (z<6) z=Math.pow(1296*z,.2)
